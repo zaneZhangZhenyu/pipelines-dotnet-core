@@ -1,0 +1,13 @@
+{
+  "scopeBindings": [
+    {
+      "scopeTagName": "global",
+      "bindings": [
+        {
+          "find": "__appBuildVersion__",
+          "replaceWith": "$buildVersion()"
+        }
+      ]
+    }
+  ]
+}

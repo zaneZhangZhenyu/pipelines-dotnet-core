@@ -1,0 +1,35 @@
+{
+	"$schema": "https://ev2schema.azure.net/schemas/2020-01-01/rolloutParameters.json",
+	"contentVersion": "1.0.0.0",
+	"extensions": [],
+	"restHealthChecks": [
+		{
+			"name": "HTTP-Availability-HealthCheck",
+			"waitDuration": "PT5M",
+			"healthyStateDuration": "PT5M",
+			"healthChecks": [
+				{
+					"name": "aks status check",
+					"request": {
+						"method": "Get",
+						"uri": "https://management.azure.com/subscriptions/59af3bf1-d118-4916-808e-923509b34a94/providers/Microsoft.AlertsManagement/alerts?api-version=2018-05-05&monitorCondition=Fired&severity=Sev2&targetResourceName=hostaxis-eastus2-dev-aks",
+						"authentication": {
+							"type": "RolloutIdentity"
+						}
+					},
+					"response": {
+						"successStatusCodes": [
+							"Ok"
+						],
+						"regex": {
+              "matchQuantifier": "All",
+              "matches": [
+                "\"value\":\\[\\]"
+              ]
+            }
+					}
+				}
+			]
+		}
+	]
+}

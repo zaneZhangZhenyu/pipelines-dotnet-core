@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ev2schema.azure.net/schemas/2020-01-01/serviceModel.json",
+    "serviceMetadata": {
+        "serviceIdentifier": "773fcab3-54b3-47df-b0be-c08250826c37",
+        "serviceGroup": "Microsoft.Security.RiskIQ.HostAxis.Chaos.HealthChecks",
+        "environment": "PPE"
+    },
+  "serviceResourceGroupDefinitions": [
+    {
+      "name": "HealthCheckGroup",
+      "serviceResourceDefinitions": [
+        {
+          "name": "HTTP-Availability-HealthCheck-Definition",
+          "composedOf": {
+            "extension": {
+              "rolloutParametersPath": "rolloutparameters\\avail.hc.rolloutparams.json"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "serviceResourceGroups": [
+    {
+      "azureResourceGroupName": "hostaxis-dev-eastus2-rg",
+      "location": "eastus2",
+      "instanceOf": "HealthCheckGroup",
+      "azureSubscriptionId": "59af3bf1-d118-4916-808e-923509b34a94",
+      "scopeTags": [
+        {
+          "name": "global"
+        }
+      ],
+      "serviceResources": [
+        {
+            "name": "HTTP-Availability-HealthCheck",
+            "instanceOf": "HTTP-Availability-HealthCheck-Definition"
+        }
+      ]
+    }
+  ]
+}
